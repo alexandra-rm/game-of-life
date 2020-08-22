@@ -25,13 +25,13 @@ const colorsMap: ColorsMap = {
 };
 
 interface BadgeWrapperProps {
-  size: number;
+  size?: number;
   color?: Color;
   circle?: boolean;
   bold?: boolean;
 }
 
-export interface BadgeProps {
+interface BadgeProps {
   text: string;
 }
 
@@ -55,6 +55,7 @@ BadgeWrapper.defaultProps = {
   circle: false,
   bold: false,
   color: "red",
+  size: 40,
 };
 
 export const Badge: FC<BadgeProps & BadgeWrapperProps> = ({

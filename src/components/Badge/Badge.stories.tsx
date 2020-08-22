@@ -16,10 +16,10 @@ export default {
 
 export const badge = () => (
   <Badge
-    size={number("size", 50)}
-    color={select("color", badgeColors, "green")}
-    bold={boolean("bold", false)}
-    circle={boolean("circle", false)}
+    size={number("size", 50, undefined, "View settings")}
+    color={select("color", badgeColors, "green", "View settings")}
+    bold={boolean("bold", false, "View settings")}
+    circle={boolean("circle", false, "View settings")}
     text={text("text", "АК")}
   />
 );
