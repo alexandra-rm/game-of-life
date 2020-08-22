@@ -10,7 +10,7 @@ export default {
 
 export const card: FC = () => (
   <Card
-    bgColor={select("bgColor", cardColors, "White", "BG_COLORS")}
+    bgColor={select("bgColor", cardColors, "White")}
     thin={boolean("thin", false)}
   >
     SomeCard

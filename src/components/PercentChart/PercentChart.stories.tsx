@@ -11,9 +11,9 @@ export default {
 export const percentChart = () => (
   <PercentChart
     percent={number("percent", 0.2)}
-    resolution={number("resolution", 720)}
-    lineWidth={number("lineWidth", 20)}
-    fontSize={number("fontSize", 80)}
+    resolution={number("resolution", 720, undefined, "View settings")}
+    lineWidth={number("lineWidth", 20, undefined, "View settings")}
+    fontSize={number("fontSize", 80, undefined, "View settings")}
     speed={number("speed", 400)}
   />
 );
