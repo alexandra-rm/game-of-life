@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { withKnobs, select } from "@storybook/addon-knobs";
+import { withKnobs, select, boolean } from "@storybook/addon-knobs";
 import { Card, cardColors } from "./Card";
 
 export default {
@@ -9,7 +9,10 @@ export default {
 };
 
 export const card: FC = () => (
-  <Card bgColor={select("bgColor", cardColors, "White", "BG_COLORS")}>
+  <Card
+    bgColor={select("bgColor", cardColors, "White", "BG_COLORS")}
+    thin={boolean("thin", false)}
+  >
     SomeCard
   </Card>
 );

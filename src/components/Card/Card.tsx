@@ -16,11 +16,12 @@ const colorsMap: ColorsMap = {
 
 export interface CardProps {
   bgColor?: Color;
+  thin?: boolean;
 }
 
 export const Card = styled("div")<CardProps>`
   border-radius: 10px;
-  padding: 15px 20px;
+  padding: ${({ thin }) => (thin ? "10px" : "15px")} 20px;
   transition: 0.1s;
   background-color: ${({ bgColor }) => colorsMap[bgColor]};
 
@@ -31,4 +32,5 @@ export const Card = styled("div")<CardProps>`
 
 Card.defaultProps = {
   bgColor: "White",
+  thin: false,
 };
