@@ -3,10 +3,15 @@ import { css, SerializedStyles } from "@emotion/core";
 
 const CommonCell = css`
   width: 25px;
-  height: 25px;
   border: 1px solid;
   padding: 1px;
   margin: 0;
+
+  :before {
+    content: "";
+    float: left;
+    padding-top: 100%; /* initial ratio of 1:1*/
+  }
 `;
 
 const FilledCell = css`
@@ -23,10 +28,8 @@ interface CellButtonProps {
   isFilled?: boolean;
 }
 
-const CellButton = styled.button`
+export const CellButton = styled.button`
   ${CommonCell};
   ${({ isFilled }: CellButtonProps): SerializedStyles =>
     isFilled ? FilledCell : EmptyCell}
 `;
-
-export { CellButton };
