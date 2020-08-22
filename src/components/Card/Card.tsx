@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const cardColors = ["Red", "White", "Yellow", "Violet"] as const;
+export const cardColors = ["red", "white", "yellow", "violet"] as const;
 type Color = typeof cardColors[number];
 
 type ColorsMap = {
@@ -8,10 +8,10 @@ type ColorsMap = {
 };
 
 const colorsMap: ColorsMap = {
-  Red: "#FF4C60",
-  White: "#FFF",
-  Yellow: "#FAAA1E",
-  Violet: "#6C6CE5",
+  red: "#FF4C60",
+  white: "#FFF",
+  yellow: "#FAAA1E",
+  violet: "#6C6CE5",
 };
 
 export interface CardProps {
@@ -31,6 +31,6 @@ export const Card = styled("div")<CardProps>`
 `;
 
 Card.defaultProps = {
-  bgColor: "White",
+  bgColor: "white",
   thin: false,
 };
