@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
-import { css, SerializedStyles } from "@emotion/core";
+import { css } from "@emotion/core";
 
 const CommonCell = css`
   width: 25px;
   border: 1px solid;
   padding: 1px;
   margin: 0;
+  cursor: pointer;
 
   :before {
     content: "";
@@ -14,22 +15,14 @@ const CommonCell = css`
   }
 `;
 
-const FilledCell = css`
-  background-color: #e74c3c;
-  border-color: #c0392b;
-`;
-
-const EmptyCell = css`
-  background-color: #ecf0f1;
-  border-color: #bdc3c7;
-`;
-
 interface CellButtonProps {
-  isFilled?: boolean;
+  backgroundColor?: string;
+  borderColor?: string;
 }
 
-export const CellButton = styled.button`
+export const CellButton = styled("button")<CellButtonProps>`
   ${CommonCell};
-  ${({ isFilled }: CellButtonProps): SerializedStyles =>
-    isFilled ? FilledCell : EmptyCell}
+  ${({ backgroundColor }) =>
+    backgroundColor && `background-color: ${backgroundColor}`};
+  ${({ borderColor }) => borderColor && `border-color: ${borderColor}`};
 `;

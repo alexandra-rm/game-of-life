@@ -4,15 +4,26 @@ import { CellButton } from "./CellButton";
 export interface CellProps {
   x: number;
   y: number;
-  isFilled?: boolean;
+  borderColor?: string;
+  backgroundColor?: string;
   onClick: (x: number, y: number) => void;
 }
 
-export const Cell: FC<CellProps> = ({ x, y, isFilled, onClick }) => {
+export const Cell: FC<CellProps> = ({
+  x,
+  y,
+  borderColor,
+  backgroundColor,
+  onClick,
+}) => {
   const onClickHandler = React.useCallback(() => {
     onClick(x, y);
   }, [x, y, onClick]);
-  return <CellButton isFilled={isFilled} onClick={onClickHandler} />;
+  return (
+    <CellButton
+      borderColor={borderColor}
+      backgroundColor={backgroundColor}
+      onClick={onClickHandler}
+    />
+  );
 };
-
-Cell.defaultProps = { isFilled: false };

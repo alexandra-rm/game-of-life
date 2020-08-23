@@ -1,11 +1,5 @@
 import React, { FC } from "react";
-import styled from "@emotion/styled";
-import { Cell } from "../Cell";
-import { CellsRow } from "./CellsRow";
-
-const GameFieldWrapper = styled.div`
-  line-height: 0;
-`;
+import { Cell, CellsRow, CellsGridWrapper } from "../Cell";
 
 export interface GameFieldProps {
   cells: boolean[][];
@@ -13,7 +7,7 @@ export interface GameFieldProps {
 }
 
 export const GameField: FC<GameFieldProps> = ({ cells, onClick }) => (
-  <GameFieldWrapper>
+  <CellsGridWrapper>
     {cells.map((row, y) => {
       return (
         <CellsRow cellsCount={row.length} key={`${y}_row`}>
@@ -24,7 +18,8 @@ export const GameField: FC<GameFieldProps> = ({ cells, onClick }) => (
                   key={`${y}_${x}`}
                   x={x}
                   y={y}
-                  isFilled={cell}
+                  borderColor={cell ? "#c0392b" : "##bdc3c7"}
+                  backgroundColor={cell ? "#e74c3c" : "##ecf0f1"}
                   onClick={onClick}
                 />
               );
@@ -33,5 +28,5 @@ export const GameField: FC<GameFieldProps> = ({ cells, onClick }) => (
         </CellsRow>
       );
     })}
-  </GameFieldWrapper>
+  </CellsGridWrapper>
 );

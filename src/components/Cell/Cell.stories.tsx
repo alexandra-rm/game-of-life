@@ -1,5 +1,5 @@
 import React from "react";
-import { withKnobs, boolean, number } from "@storybook/addon-knobs";
+import { withKnobs, number, text } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import { Cell } from "./Cell";
 
@@ -13,7 +13,8 @@ export const cell = () => (
   <Cell
     x={number("x", 1)}
     y={number("y", 3)}
-    isFilled={boolean("isFilled", false)}
     onClick={action("onClick")}
+    backgroundColor={text("backgroundColor", "")}
+    borderColor={text("borderColor", "")}
   />
 );

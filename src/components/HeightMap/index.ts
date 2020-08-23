@@ -1,0 +1,1 @@
+export { HeightMap } from "./HeightMap";

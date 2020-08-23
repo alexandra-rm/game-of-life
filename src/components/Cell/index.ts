@@ -1,2 +1,3 @@
 export { Cell } from "./Cell";
-export { CellButton } from "./CellButton";
+export { CellsRow } from "./CellsRow";
+export { CellsGridWrapper } from "./CellsGridWrapper";

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { CellButton } from "../Cell";
+import { CellButton } from "./CellButton";
 
 interface CellsRowProps {
   cellsCount: number;
