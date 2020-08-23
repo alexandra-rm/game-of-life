@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { lerpColors } from "@/utils/lerpColors";
 import { PercentChartProps } from "./PercentChartProps";
 import { PercentChartState } from "./PercentChartState";
-import { drawChart, lerpColors, lerp } from "./helpers";
+import { drawChart, lerp } from "./helpers";
 
 const Canvas = styled.canvas`
   width: 100%;

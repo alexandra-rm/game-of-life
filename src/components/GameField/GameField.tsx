@@ -18,8 +18,8 @@ export const GameField: FC<GameFieldProps> = ({ cells, onClick }) => (
                   key={`${y}_${x}`}
                   x={x}
                   y={y}
-                  borderColor={cell ? "#c0392b" : "##bdc3c7"}
-                  backgroundColor={cell ? "#e74c3c" : "##ecf0f1"}
+                  borderColor={cell ? "#c0392b" : "#bdc3c7"}
+                  backgroundColor={cell ? "#e74c3c" : "#ecf0f1"}
                   onClick={onClick}
                 />
               );
