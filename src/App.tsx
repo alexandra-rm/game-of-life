@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { GamePage, HomePage, NotFoundPage } from "@/pages";
 import { store } from "./store";
 import { PageContent, PageWrapper, SideColumn } from "./AppComponents";
+import { Widgets } from "./modules";
 
 const App: FC = () => {
   return (
@@ -18,7 +19,9 @@ const App: FC = () => {
             </Switch>
           </BrowserRouter>
         </PageContent>
-        <SideColumn>SideColumn</SideColumn>
+        <SideColumn>
+          <Widgets />
+        </SideColumn>
       </PageWrapper>
     </Provider>
   );

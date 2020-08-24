@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Widget {
   id: string;
-  component: () => JSX.Element;
+  widget: string;
   props?: object; // TODO: perhaps it is worth removing this field
 }
 

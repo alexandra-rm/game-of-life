@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { config } from "./config";
 import { Widget } from "./reducer";
 
 export interface WidgetsGroupProps {
@@ -9,9 +10,10 @@ export const WidgetsGroup: FC<WidgetsGroupProps> = ({ widgets }) => {
   return (
     <div>
       {widgets.map((widget) => {
-        const { component: Component, id, props } = widget;
+        const { widget: widgetName, id, props } = widget;
+        const Component = config[widgetName];
         return (
-          <div>
+          <div key={id}>
             <Component {...props} id={id} />
           </div>
         );

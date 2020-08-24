@@ -1,2 +1,7 @@
 export { Widgets } from "./Widgets";
-export { GameOfLife } from "./GameOfLife";
+export {
+  GameOfLife,
+  SizeWidget,
+  GameParamsWidget,
+  GameProcessWidget,
+} from "./GameOfLife";

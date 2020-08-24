@@ -1,14 +1,13 @@
-import React from "react";
 import { actions, reducer, initialState } from "./reducer";
 
 const widgetConfig = {
   id: "someWidget",
-  component: () => <div>SomeWidget</div>,
+  widget: "someWidget",
 };
 
 const widgetConfig2 = {
   id: "someSecondWidget",
-  component: () => <div>someSecondWidget</div>,
+  widget: "someSecondWidget",
 };
 
 describe("Widgets reducer", () => {
