@@ -6,8 +6,6 @@ interface CellsRowProps {
 }
 
 export const CellsRow = styled("div")<CellsRowProps>`
-  background-color: cyan;
-
   ${CellButton} {
     width: ${({ cellsCount }) => 100 / Math.max(cellsCount, 1)}%;
   }
