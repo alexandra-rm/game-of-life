@@ -1,2 +1,2 @@
-export { Widgets } from "./Widgets";
 export { GameOfLife } from "./GameOfLife";
+export { gameSlice } from "./reducer";
