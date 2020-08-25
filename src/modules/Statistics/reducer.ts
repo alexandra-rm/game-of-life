@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
   generation: 0,
+  filledPercent: 0,
   counters: [[]] as number[][],
 };
 
@@ -44,6 +45,27 @@ export const statisticsSlice = createSlice({
         counters: newCounters,
       };
     },
+    discardFilledPercent: (state) => ({
+      ...state,
+      filledPercent: 0,
+    }),
+    updateFilledPercent: (state, { payload }) => {
+      const newPercent =
+        payload.reduce((sum, arr) => {
+          const temp = arr.reduce((acc, cell) => acc + (cell ? 1 : 0), 0);
+          return sum + temp;
+        }, 0) /
+        (payload.length * payload[0].length);
+
+      return {
+        ...state,
+        filledPercent: newPercent,
+      };
+    },
+    setFilledPercent: (state, { payload }) => ({
+      ...state,
+      filledPercent: payload,
+    }),
   },
 });
 
