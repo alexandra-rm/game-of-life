@@ -5,11 +5,7 @@ import { GamePage, HomePage, NotFoundPage } from "@/pages";
 import { store } from "./store";
 import { PageContent, PageWrapper, SideColumn } from "./AppComponents";
 import { Widgets } from "./modules";
-import {
-  Statistics,
-  HeightStatistics,
-  FilledPercentStatistics,
-} from "./modules/Statistics";
+import { Statistics, FilledPercentStatistics } from "./modules/Statistics";
 
 const App: FC = () => {
   return (
@@ -26,7 +22,6 @@ const App: FC = () => {
         </PageContent>
         <SideColumn>
           <FilledPercentStatistics />
-          <HeightStatistics />
           <Statistics />
           <Widgets />
         </SideColumn>

@@ -1,17 +1,41 @@
 import React from "react";
-import { HeightMap } from "@/components";
 import { connect } from "react-redux";
+import { HeightMap } from "@/components";
+import { actions } from "../Bets/reducer";
 
-const mapStateToProps = ({ statistics }) => ({
+// TODO: подумать над структурой
+
+const mapStateToProps = ({ statistics, bets }) => ({
   cells: statistics.counters,
+  allowBet: bets.allowBet,
 });
 
-const HeightStatisticsComponent = ({ cells }) => {
+const mapDispatchToProps = {
+  setIsOpenBetWindow: actions.setIsOpenBetWindow,
+  setBetCell: actions.setBetCell,
+};
+
+const HeightStatisticsComponent = ({
+  cells,
+  setIsOpenBetWindow,
+  setBetCell,
+  allowBet,
+}) => {
   return (
-    <HeightMap cells={cells} onClick={(x, y) => console.log(cells[y][x])} />
+    <HeightMap
+      cells={cells}
+      onClick={(x, y) => {
+        console.log(cells[y][x]);
+        if (allowBet) {
+          setIsOpenBetWindow(true);
+          setBetCell({ x, y });
+        }
+      }}
+    />
   );
 };
 
-export const HeightStatistics = connect(mapStateToProps)(
-  HeightStatisticsComponent
-);
+export const HeightStatistics = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HeightStatisticsComponent);

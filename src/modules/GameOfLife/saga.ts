@@ -15,7 +15,6 @@ function* backgroundGame() {
     yield put(actions.update());
     const gameProcessState = yield select(getGameProcessState);
     seconds = gameProcessState.speed <= 0 ? 0 : 1000 / gameProcessState.speed;
-    console.log("delay(seconds)", seconds);
     yield delay(seconds);
   }
 }

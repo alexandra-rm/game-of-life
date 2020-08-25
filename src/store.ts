@@ -6,10 +6,13 @@ import { widgetsSlice } from "./modules/Widgets/reducer";
 import { statisticsSaga } from "./modules/Statistics";
 import { statisticsSlice } from "./modules/Statistics/reducer";
 import { gameSaga } from "./modules/GameOfLife/saga";
+import { betsSlice } from "./modules/Bets/reducer";
+import { betsSaga } from "./modules/Bets/saga";
 
 const reducer = combineReducers({
   game: gameSlice.reducer,
   statistics: statisticsSlice.reducer,
+  bets: betsSlice.reducer,
   widgets: widgetsSlice.reducer,
 });
 
@@ -21,3 +24,4 @@ export const store = configureStore({ reducer, middleware: [sagaMiddleware] });
 
 sagaMiddleware.run(statisticsSaga);
 sagaMiddleware.run(gameSaga);
+sagaMiddleware.run(betsSaga);
