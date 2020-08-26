@@ -5,6 +5,7 @@ import {
   actions as statisticsActions,
   StatisticsOnClickActionType,
 } from "../Statistics/reducer";
+import { actions as moneyActions } from "../Money/reducer";
 import { actions, BetsState } from "./reducer";
 import { getMaxValue } from "./helpers";
 
@@ -36,7 +37,7 @@ function* banBet() {
 
 function* checkBet() {
   const generation = yield select(getGeneration);
-  const bet = yield select(getBetData);
+  const bet: BetsState = yield select(getBetData);
   if (bet.betGeneration == generation) {
     const counters = yield select(getCounters);
 
@@ -45,9 +46,9 @@ function* checkBet() {
     const delta = (maxVal - betCellValue) / maxVal;
 
     if (delta <= bet.maxError) {
-      console.log("Вы выиграли");
+      yield put(moneyActions.addCash(bet.bet));
     } else {
-      console.log("Вы проиграли");
+      yield put(moneyActions.minusCash(bet.bet));
     }
   }
 }

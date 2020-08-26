@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export const initialState = {
+export type MoneyState = {
+  cash: number;
+};
+
+export const initialState: MoneyState = {
   cash: 0,
 };
 
