@@ -28,3 +28,16 @@ export const Links = styled.div`
 export const PageHeader = styled.header`
   margin-bottom: 40px;
 `;
+
+export const AbsoluteCenter = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+`;
+
+export const RelativeWrapper = styled.div`
+  position: relative;
+  min-height: 80vh;
+`;

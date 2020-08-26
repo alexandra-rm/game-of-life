@@ -34,16 +34,27 @@ function* banBet() {
   yield put(actions.setBet(0));
   yield put(actions.setBetCell(undefined));
   yield put(actions.setIsOpenBetWindow(false));
+  notifications.addNotification({
+    title: "Предупреждение",
+    message: `Ваша ставка аннулирована`,
+    type: "warning",
+    insert: "top",
+    container: "top-center",
+    dismiss: {
+      duration: 5000,
+      onScreen: true,
+    },
+  });
 }
 
 function* checkBet() {
   const generation = yield select(getGeneration);
   const bet: BetsState = yield select(getBetData);
-  if (bet.betGeneration == generation) {
+  if (bet && bet.bet && bet.betGeneration == generation) {
     const counters = yield select(getCounters);
 
     const maxVal = getMaxValue(counters);
-    const betCellValue = counters[bet.betCell.y][bet.betCell.x];
+    const betCellValue = counters[bet.betCell.y || 0][bet.betCell.x];
     const delta = (maxVal - betCellValue) / maxVal;
 
     const deltaCash = (bet.bet * bet.betGeneration) / (bet.maxError + 1) / 100;

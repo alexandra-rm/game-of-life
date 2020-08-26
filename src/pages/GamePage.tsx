@@ -9,7 +9,7 @@ import { BetWindow } from "@/modules/Bets/BetWindow";
 import { PageHeader, StyledNavLink, H1, Links } from "./styled";
 
 const GameWrapper = styled.div`
-  max-width: 60%;
+  max-width: 55%;
   margin: 0 auto;
 `;
 
