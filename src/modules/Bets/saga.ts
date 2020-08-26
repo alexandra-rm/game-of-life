@@ -45,10 +45,12 @@ function* checkBet() {
     const betCellValue = counters[bet.betCell.y][bet.betCell.x];
     const delta = (maxVal - betCellValue) / maxVal;
 
+    const deltaCash = (bet.bet * bet.betGeneration) / (bet.maxError + 1) / 100;
+
     if (delta <= bet.maxError) {
-      yield put(moneyActions.addCash(bet.bet));
+      yield put(moneyActions.addCash(deltaCash));
     } else {
-      yield put(moneyActions.minusCash(bet.bet));
+      yield put(moneyActions.minusCash(deltaCash));
     }
 
     yield put(gameActions.switchGameStatus());

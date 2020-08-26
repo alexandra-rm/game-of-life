@@ -50,7 +50,7 @@ export const SizeSettings: React.FC<SizeSettingsProps> = ({
     [resize, width, height]
   );
 
-  const [isSquare, setIsSquare] = React.useState(false);
+  const [isSquare, setIsSquare] = React.useState(true);
 
   const setProportion = React.useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {

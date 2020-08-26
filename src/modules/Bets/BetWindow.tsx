@@ -74,12 +74,12 @@ const BetWindowComponent = ({
             <td>
               <Input
                 name="bet"
-                value={maxError}
+                value={maxError * 100}
                 placeholder="Погрешность"
                 type="number"
                 min={0}
                 max={100}
-                step={0.01}
+                step={1}
                 onChange={(event) =>
                   setMaxError(Number.parseFloat(event.target.value))
                 }
