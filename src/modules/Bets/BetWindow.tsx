@@ -12,7 +12,7 @@ const ActionWindow = styled.div`
   bottom: 0;
   right: ${({ isOpen }) => (isOpen ? "0" : "-1000")}px;
   transition: 0.2s;
-  background-color: green;
+  background-color: #8847da;
 `;
 
 const mapStateToProps = ({ bets }) => ({
@@ -21,11 +21,13 @@ const mapStateToProps = ({ bets }) => ({
   betGeneration: bets.betGeneration,
   betCell: bets.betCell,
   setIsOpen: bets.isOpenBetWindow,
+  maxError: bets.maxError,
 });
 
 const mapDispatchToProps = {
   setIsOpen: actions.setIsOpenBetWindow,
   setBet: actions.setBet,
+  setMaxError: actions.setMaxError,
   setBetGeneration: actions.setBetGeneration,
   confirm: actions.confirmBet,
 };
@@ -39,6 +41,8 @@ const BetWindowComponent = ({
   setBet,
   setBetGeneration,
   confirm,
+  maxError,
+  setMaxError,
 }) => {
   const x = (betCell || {}).x;
   const y = (betCell || {}).y;
@@ -55,13 +59,28 @@ const BetWindowComponent = ({
         name="bet"
         value={bet}
         placeholder="Ставка"
+        type="number"
+        min={1}
         onChange={(event) => setBet(event.target.value)}
+      />
+      <input
+        name="bet"
+        value={maxError}
+        placeholder="Погрешность"
+        type="number"
+        min={0}
+        max={100}
+        onChange={(event) => setMaxError(event.target.value)}
       />
       <input
         name="betGeneration"
         value={betGeneration}
         placeholder="Поколение"
-        onChange={(event) => setBetGeneration(event.target.value)}
+        type="number"
+        min={10}
+        onChange={(event) =>
+          setBetGeneration(Number.parseInt(event.target.value || 0))
+        }
       />
       <button onClick={confirm}>Подтвердить</button>
       <button onClick={close}>Закрыть</button>

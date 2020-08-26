@@ -6,6 +6,7 @@ export const initialState = {
   bet: 0,
   betGeneration: 0,
   isOpenBetWindow: false,
+  maxError: 0,
 };
 
 export const betsSlice = createSlice({
@@ -36,6 +37,10 @@ export const betsSlice = createSlice({
       ...state,
       allowBet: false,
       isOpenBetWindow: false,
+    }),
+    setMaxError: (state, { payload }) => ({
+      ...state,
+      maxError: payload,
     }),
   },
 });
