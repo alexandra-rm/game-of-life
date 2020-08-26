@@ -1,12 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { PercentChart, Card } from "@/components";
+import { RootState } from "@/store";
 
-const mapStateToProps = ({ statistics }) => ({
+const mapStateToProps = ({ statistics }: RootState) => ({
   percent: statistics.filledPercent,
 });
 
-const FilledPercentComponent = ({ percent }) => (
+export type Props = ReturnType<typeof mapStateToProps>;
+
+const FilledPercentComponent = ({ percent }: Props) => (
   <Card>
     <PercentChart percent={percent} speed={400} lineWidth={40} />
   </Card>

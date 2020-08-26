@@ -1,10 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { cellToNum, isEqualSize, filledCount } from "./helpers";
 
 export const initialState = {
   generation: 0,
   filledPercent: 0,
   counters: [[]] as number[][],
 };
+
+export type Statistics = typeof initialState;
+
+export type CountersActionType = PayloadAction<boolean[][]>;
+export type SetFilledPercentActionType = PayloadAction<number>;
 
 export const statisticsSlice = createSlice({
   name: "statistics",
@@ -22,21 +28,17 @@ export const statisticsSlice = createSlice({
       ...state,
       counters: [[]],
     }),
-    initCounters: (state, { payload }) => ({
+    initCounters: (state, { payload }: CountersActionType) => ({
       ...state,
-      counters: payload.map((row) => row.map((cell) => (cell ? 1 : 0))),
+      counters: payload.map((row) => row.map(cellToNum)),
     }),
-    addCounters: (state, { payload }) => {
+    addCounters: (state, { payload }: CountersActionType) => {
       let newCounters: number[][] = [[]];
-
-      if (
-        payload.length !== state.counters.length ||
-        payload[0].length !== state.counters[0].length
-      ) {
-        newCounters = payload.map((row) => row.map((cell) => (cell ? 1 : 0)));
+      if (!isEqualSize(payload, state.counters)) {
+        newCounters = payload.map((row) => row.map(cellToNum));
       } else {
         newCounters = state.counters.map((row, y) =>
-          row.map((cell, x) => cell + (payload[y][x] ? 1 : 0))
+          row.map((cell, x) => cell + cellToNum(payload[y][x]))
         );
       }
 
@@ -49,20 +51,16 @@ export const statisticsSlice = createSlice({
       ...state,
       filledPercent: 0,
     }),
-    updateFilledPercent: (state, { payload }) => {
-      const newPercent =
-        payload.reduce((sum, arr) => {
-          const temp = arr.reduce((acc, cell) => acc + (cell ? 1 : 0), 0);
-          return sum + temp;
-        }, 0) /
-        (payload.length * payload[0].length);
+    updateFilledPercent: (state, { payload }: CountersActionType) => {
+      const cellsCount = payload.length * payload[0].length;
+      const newPercent = filledCount(payload) / cellsCount;
 
       return {
         ...state,
         filledPercent: newPercent,
       };
     },
-    setFilledPercent: (state, { payload }) => ({
+    setFilledPercent: (state, { payload }: SetFilledPercentActionType) => ({
       ...state,
       filledPercent: payload,
     }),

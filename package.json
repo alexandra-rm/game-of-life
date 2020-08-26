@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint ./src --fix --ext .js,.jsx,.ts,.tsx",
     "loki:update": "npm run build-storybook && npx loki update --requireReference --reactUri file:./storybook-static",
     "loki:approve": "npx loki approve",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "ts:check": "npx tsc -p tsconfig.json --noEmit",
     "test:loki": "npm run build-storybook && npx loki --requireReference --reactUri file:./storybook-static"
   },
   "repository": {

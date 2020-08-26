@@ -18,7 +18,7 @@ const reducer = combineReducers({
 
 const sagaMiddleware = createSagaMiddleware();
 
-export type GOLGameState = ReturnType<typeof reducer>;
+export type RootState = ReturnType<typeof reducer>;
 
 export const store = configureStore({ reducer, middleware: [sagaMiddleware] });
 
