@@ -7,8 +7,11 @@ export interface ButtonProps {
 
 export const Button = styled("button")<ButtonProps>`
   ${({ fullWidth }) => fullWidth && "width: 100%;"}
-  padding: 5px 12px;
-  ${({ rounded }) => rounded && "border-radius: 10px;"}
-  font-family: 'Roboto', sans-serif;
+  padding: 7px 12px;
+  border-radius: ${({ rounded }) => (rounded ? "10" : "5")}px;
+  font-family: "Roboto", sans-serif;
   cursor: pointer;
+  background-color: #323a52;
+  color: white;
+  border: none;
 `;

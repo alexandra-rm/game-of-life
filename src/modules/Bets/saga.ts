@@ -8,7 +8,7 @@ import {
 } from "../Statistics/reducer";
 import { actions as moneyActions } from "../Money/reducer";
 import { actions, BetsState } from "./reducer";
-import { getMaxValue } from "./helpers";
+import { getMaxValue, computeGain } from "./helpers";
 
 const getInitialPercent = (state: RootState) => state.game.initialPercent;
 const getGeneration = (state: RootState) => state.statistics.generation;
@@ -30,21 +30,24 @@ function* disableBet() {
 }
 
 function* banBet() {
-  yield put(actions.setAllowBet(false));
-  yield put(actions.setBet(0));
-  yield put(actions.setBetCell(undefined));
-  yield put(actions.setIsOpenBetWindow(false));
-  notifications.addNotification({
-    title: "Предупреждение",
-    message: `Ваша ставка аннулирована`,
-    type: "warning",
-    insert: "top",
-    container: "top-center",
-    dismiss: {
-      duration: 5000,
-      onScreen: true,
-    },
-  });
+  const bet: BetsState = yield select(getBetData);
+  if (bet && bet.bet) {
+    yield put(actions.setAllowBet(false));
+    yield put(actions.setBet(0));
+    yield put(actions.setBetCell(undefined));
+    yield put(actions.setIsOpenBetWindow(false));
+    notifications.addNotification({
+      title: "Предупреждение",
+      message: `Ваша ставка аннулирована`,
+      type: "warning",
+      insert: "top",
+      container: "top-center",
+      dismiss: {
+        duration: 5000,
+        onScreen: true,
+      },
+    });
+  }
 }
 
 function* checkBet() {
@@ -57,7 +60,7 @@ function* checkBet() {
     const betCellValue = counters[bet.betCell.y || 0][bet.betCell.x];
     const delta = (maxVal - betCellValue) / maxVal;
 
-    const deltaCash = (bet.bet * bet.betGeneration) / (bet.maxError + 1) / 100;
+    const deltaCash = computeGain(bet.bet, bet.betGeneration, bet.maxError);
 
     if (delta <= bet.maxError) {
       yield put(moneyActions.addCash(deltaCash));
@@ -73,10 +76,10 @@ function* checkBet() {
         },
       });
     } else {
-      yield put(moneyActions.minusCash(deltaCash));
+      yield put(moneyActions.minusCash(bet.bet));
       notifications.addNotification({
         title: "You lose!",
-        message: `-${deltaCash.toFixed(2)}`,
+        message: `-${bet.bet.toFixed(2)}`,
         type: "danger",
         insert: "top",
         container: "top-center",

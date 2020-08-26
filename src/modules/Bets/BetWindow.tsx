@@ -5,6 +5,7 @@ import { actions } from "./reducer";
 import { RootState } from "@/store";
 import { ActionWindow, Button } from "@/components";
 import { Header, H3, CloseButton, Table, Input } from "./styled";
+import { computeGain } from "./helpers";
 
 const mapStateToProps = ({ bets }: RootState) => ({
   isOpen: bets.isOpenBetWindow,
@@ -100,6 +101,10 @@ const BetWindowComponent = ({
                 }
               />
             </td>
+          </tr>
+          <tr>
+            <td>Возможный выигрыш:</td>
+            <td>{computeGain(bet, betGeneration, maxError).toFixed(2)}</td>
           </tr>
           <tr>
             <td colSpan={2}>
