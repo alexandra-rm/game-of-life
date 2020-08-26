@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
+import { RootState } from "@/store";
 import { RangeRow } from "./components/RangeRow";
 import { TableForm } from "./components/TableForm";
 import { actions } from "./reducer";
 
-const mapStateToProps = ({ game }) => ({
+const mapStateToProps = ({ game }: RootState) => ({
   height: game.height,
   width: game.width,
   isRunning: game.isRunning,

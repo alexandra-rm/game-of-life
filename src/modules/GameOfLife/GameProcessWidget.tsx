@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import { connect } from "react-redux";
+import { RootState } from "@/store";
 import { actions } from "../GameOfLife/reducer";
 import { FormFooter } from "./components/FormFooter";
 
-const mapStateToProps = ({ game }) => ({
+const mapStateToProps = ({ game }: RootState) => ({
   isRunning: game.isRunning,
 });
 

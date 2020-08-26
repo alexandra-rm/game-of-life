@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import { connect } from "react-redux";
+import { RootState } from "@/store";
 import { WidgetsCollection } from "./reducer";
 import { WidgetsGroup } from "./WidgetsGroup";
 
-const mapStateToProps = ({ widgets }) => ({
+const mapStateToProps = ({ widgets }: RootState) => ({
   currentPageWidgets: widgets.currentPageWidgets,
   commonWidgets: widgets.commonWidgets,
 });
