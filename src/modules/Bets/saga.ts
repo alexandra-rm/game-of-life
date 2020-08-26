@@ -1,12 +1,14 @@
 import { put, takeEvery, select } from "redux-saga/effects";
+import { RootState } from "@/store";
 import { actions as gameActions } from "../GameOfLife/reducer";
 import { actions as statisticsActions } from "../Statistics/reducer";
 import { actions } from "./reducer";
+import { getMaxValue } from "./helpers";
 
-const getInitialPercent = (state) => state.game.initialPercent;
-const getGeneration = (state) => state.statistics.generation;
-const getCounters = (state) => state.statistics.counters;
-const getBetData = (state) => state.bets;
+const getInitialPercent = (state: RootState) => state.game.initialPercent;
+const getGeneration = (state: RootState) => state.statistics.generation;
+const getCounters = (state: RootState) => state.statistics.counters;
+const getBetData = (state: RootState) => state.bets;
 
 function* discardWorker() {
   const percent = yield select(getInitialPercent);
@@ -30,26 +32,15 @@ function* banBet() {
 }
 
 function* checkBet() {
-  console.log("checkBet");
   const generation = yield select(getGeneration);
   const bet = yield select(getBetData);
-  console.log("bet.betGeneration", bet.betGeneration, "generation", generation);
   if (bet.betGeneration == generation) {
     const counters = yield select(getCounters);
-    let maxCell = { x: 0, y: 0 };
-    let maxVal = 0;
 
-    counters.forEach((row, y) =>
-      row.forEach((cell, x) => {
-        if (cell > maxVal) {
-          maxVal = cell;
-          maxCell = { x, y };
-        }
-      })
-    );
-
+    const maxVal = getMaxValue(counters);
     const betCellValue = counters[bet.betCell.y][bet.betCell.x];
     const delta = (maxVal - betCellValue) / maxVal;
+
     if (delta <= bet.maxError) {
       console.log("Вы выиграли");
     } else {

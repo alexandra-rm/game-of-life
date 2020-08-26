@@ -1,18 +1,19 @@
 import { put, takeEvery, select } from "redux-saga/effects";
+import { RootState } from "@/store";
 import { actions as gameActions } from "../GameOfLife/reducer";
 import { actions as statisticsActions } from "./reducer";
 
-const getGameField = (state) => state.game.field;
-const getInitialPercent = (state) => state.game.initialPercent;
+const getGameField = (state: RootState) => state.game.field;
+const getInitialPercent = (state: RootState) => state.game.initialPercent;
 
-function* incrementWorker(arg) {
+function* incrementWorker() {
   const field = yield select(getGameField);
   yield put(statisticsActions.addCounters(field));
   yield put(statisticsActions.incrementGen());
   yield put(statisticsActions.updateFilledPercent(field));
 }
 
-function* discardWorker(arg) {
+function* discardWorker() {
   const field = yield select(getGameField);
   yield put(statisticsActions.initCounters(field));
   yield put(statisticsActions.discardGen());

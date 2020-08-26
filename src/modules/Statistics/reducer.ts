@@ -1,13 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { cellToNum, isEqualSize, filledCount } from "./helpers";
 
-export const initialState = {
-  generation: 0,
-  filledPercent: 0,
-  counters: [[]] as number[][],
+export type StatisticsState = {
+  generation: number;
+  filledPercent: number;
+  counters: number[][];
 };
 
-export type Statistics = typeof initialState;
+export const initialState: StatisticsState = {
+  generation: 0,
+  filledPercent: 0,
+  counters: [[]],
+};
 
 export type CountersActionType = PayloadAction<boolean[][]>;
 export type SetFilledPercentActionType = PayloadAction<number>;

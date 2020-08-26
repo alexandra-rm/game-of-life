@@ -1,21 +1,10 @@
 import React from "react";
-import styled from "@emotion/styled";
 import { connect } from "react-redux";
 import { actions } from "./reducer";
+import { RootState } from "@/store";
+import { ActionWindow } from "@/components";
 
-// TODO: вынести в отдельный компонент
-const ActionWindow = styled.div`
-  display: inline-block;
-  width: 40%;
-  height: 40vh;
-  position: fixed;
-  bottom: 0;
-  right: ${({ isOpen }) => (isOpen ? "0" : "-1000")}px;
-  transition: 0.2s;
-  background-color: #8847da;
-`;
-
-const mapStateToProps = ({ bets }) => ({
+const mapStateToProps = ({ bets }: RootState) => ({
   isOpen: bets.isOpenBetWindow,
   bet: bets.bet,
   betGeneration: bets.betGeneration,
@@ -32,6 +21,9 @@ const mapDispatchToProps = {
   confirm: actions.confirmBet,
 };
 
+export type Props = ReturnType<typeof mapStateToProps> &
+  typeof mapDispatchToProps;
+
 const BetWindowComponent = ({
   isOpen,
   betCell,
@@ -43,7 +35,7 @@ const BetWindowComponent = ({
   confirm,
   maxError,
   setMaxError,
-}) => {
+}: Props) => {
   const x = (betCell || {}).x;
   const y = (betCell || {}).y;
 
@@ -61,7 +53,7 @@ const BetWindowComponent = ({
         placeholder="Ставка"
         type="number"
         min={1}
-        onChange={(event) => setBet(event.target.value)}
+        onChange={(event) => setBet(Number.parseInt(event.target.value))}
       />
       <input
         name="bet"
@@ -70,7 +62,8 @@ const BetWindowComponent = ({
         type="number"
         min={0}
         max={100}
-        onChange={(event) => setMaxError(event.target.value)}
+        step={0.01}
+        onChange={(event) => setMaxError(Number.parseFloat(event.target.value))}
       />
       <input
         name="betGeneration"
@@ -79,7 +72,7 @@ const BetWindowComponent = ({
         type="number"
         min={10}
         onChange={(event) =>
-          setBetGeneration(Number.parseInt(event.target.value || 0))
+          setBetGeneration(Number.parseInt(event.target.value || "0"))
         }
       />
       <button onClick={confirm}>Подтвердить</button>
