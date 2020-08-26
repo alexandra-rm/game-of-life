@@ -15,18 +15,14 @@ export const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
-    update: (state) => {
-      return {
-        ...state,
-        field: nextEpoch(state.field),
-      };
-    },
-    click: (state, { payload }) => {
-      return {
-        ...state,
-        field: toggleCellState(state.field, payload.x, payload.y),
-      };
-    },
+    update: (state) => ({
+      ...state,
+      field: nextEpoch(state.field),
+    }),
+    click: (state, { payload }) => ({
+      ...state,
+      field: toggleCellState(state.field, payload.x, payload.y),
+    }),
     resize: (state, { payload }) => {
       const { width, height } = payload;
       return {
@@ -45,32 +41,24 @@ export const gameSlice = createSlice({
         field,
       };
     },
-    setInitialPercent: (state, { payload }) => {
-      return {
-        ...state,
-        field: generateField(state.height, state.width, payload),
-        initialPercent: payload,
-      };
-    },
-    setSpeed: (state, { payload }) => {
-      return {
-        ...state,
-        speed: payload,
-      };
-    },
-    switchGameStatus: (state) => {
-      return {
-        ...state,
-        isRunning: !state.isRunning,
-      };
-    },
-    reset: (state) => {
-      return {
-        ...state,
-        initialPercent: initialState.initialPercent,
-        field: initFields(state.height, state.width),
-      };
-    },
+    setInitialPercent: (state, { payload }) => ({
+      ...state,
+      field: generateField(state.height, state.width, payload),
+      initialPercent: payload,
+    }),
+    setSpeed: (state, { payload }) => ({
+      ...state,
+      speed: payload,
+    }),
+    switchGameStatus: (state) => ({
+      ...state,
+      isRunning: !state.isRunning,
+    }),
+    reset: (state) => ({
+      ...state,
+      initialPercent: initialState.initialPercent,
+      field: initFields(state.height, state.width),
+    }),
   },
 });
 
