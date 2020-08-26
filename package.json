@@ -13,8 +13,8 @@
     "build-storybook": "build-storybook",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "ts:check": "npx tsc -p tsconfig.json --noEmit",
-    "test:loki": "npm run build-storybook && npx loki --requireReference --reactUri file:./storybook-static"
+    "test:loki": "npm run build-storybook && npx loki --requireReference --reactUri file:./storybook-static",
+    "ts:check": "npx tsc -p tsconfig.json --noEmit"
   },
   "repository": {
     "type": "git",
