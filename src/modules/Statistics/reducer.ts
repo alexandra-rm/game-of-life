@@ -15,6 +15,10 @@ export const initialState: StatisticsState = {
 
 export type CountersActionType = PayloadAction<boolean[][]>;
 export type SetFilledPercentActionType = PayloadAction<number>;
+export type StatisticsOnClickActionType = PayloadAction<{
+  x: number;
+  y: number;
+}>;
 
 export const statisticsSlice = createSlice({
   name: "statistics",
@@ -68,6 +72,7 @@ export const statisticsSlice = createSlice({
       ...state,
       filledPercent: payload,
     }),
+    onClick: (state, { payload }: StatisticsOnClickActionType) => state,
   },
 });
 

@@ -1,8 +1,11 @@
 import { put, takeEvery, select } from "redux-saga/effects";
 import { RootState } from "@/store";
 import { actions as gameActions } from "../GameOfLife/reducer";
-import { actions as statisticsActions } from "../Statistics/reducer";
-import { actions } from "./reducer";
+import {
+  actions as statisticsActions,
+  StatisticsOnClickActionType,
+} from "../Statistics/reducer";
+import { actions, BetsState } from "./reducer";
 import { getMaxValue } from "./helpers";
 
 const getInitialPercent = (state: RootState) => state.game.initialPercent;
@@ -49,6 +52,14 @@ function* checkBet() {
   }
 }
 
+function* clickListener(action: StatisticsOnClickActionType) {
+  const bet: BetsState = yield select(getBetData);
+  if (bet.allowBet) {
+    yield put(actions.setBetCell(action.payload));
+    yield put(actions.setIsOpenBetWindow(true));
+  }
+}
+
 function* betsSaga() {
   yield takeEvery(
     [
@@ -62,6 +73,7 @@ function* betsSaga() {
   yield takeEvery(gameActions.switchGameStatus, disableBet);
   yield takeEvery(gameActions.click, banBet);
   yield takeEvery(statisticsActions.incrementGen, checkBet);
+  yield takeEvery(statisticsActions.onClick, clickListener);
 }
 
 export { betsSaga };

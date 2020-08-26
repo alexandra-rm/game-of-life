@@ -13,7 +13,7 @@ function* incrementWorker() {
   yield put(statisticsActions.updateFilledPercent(field));
 }
 
-function* discardWorker() {
+function* discardWorker(arg) {
   const field = yield select(getGameField);
   yield put(statisticsActions.initCounters(field));
   yield put(statisticsActions.discardGen());
