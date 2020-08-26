@@ -5,8 +5,6 @@ import { RootState } from "@/store";
 import { actions } from "./reducer";
 
 const mapStateToProps = ({ game }: RootState) => ({
-  speed: game.speed,
-  isRunning: game.isRunning,
   field: game.field,
 });
 
@@ -17,21 +15,16 @@ const mapDispatchToProps = {
 export type Props = ReturnType<typeof mapStateToProps> &
   typeof mapDispatchToProps;
 
-class GameOfLifeComponent extends React.Component<Props, {}> {
-  constructor(props: Props) {
-    super(props);
+const GameOfLifeComponent = ({ field, click }: Props) => {
+  const onClickHandler = React.useCallback(
+    (x: number, y: number) => {
+      click({ x, y });
+    },
+    [click]
+  );
 
-    this.onClickHandler = this.onClickHandler.bind(this);
-  }
-
-  onClickHandler(x: number, y: number): void {
-    this.props.click({ x, y });
-  }
-
-  render(): JSX.Element {
-    return <GameField cells={this.props.field} onClick={this.onClickHandler} />;
-  }
-}
+  return <GameField cells={field} onClick={onClickHandler} />;
+};
 
 export const GameOfLife = connect(
   mapStateToProps,

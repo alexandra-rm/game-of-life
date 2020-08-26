@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface Widget {
   id: string;
   widget: string;
-  props?: object; // TODO: perhaps it is worth removing this field
 }
 
 export interface WidgetsCollection {
