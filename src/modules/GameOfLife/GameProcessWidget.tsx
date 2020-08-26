@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { connect } from "react-redux";
 import { RootState } from "@/store";
+import { Button } from "@/components";
 import { actions } from "../GameOfLife/reducer";
 import { FormFooter } from "./components/FormFooter";
 
@@ -21,9 +22,9 @@ const GameProcessComponent: FC<GameProcessProps> = ({
 }) => {
   return (
     <FormFooter>
-      <button name="startStop" color="blue" onClick={switchGameStatus}>
+      <Button name="startStop" onClick={switchGameStatus} fullWidth>
         {isRunning ? "Stop" : "Start"}
-      </button>
+      </Button>
     </FormFooter>
   );
 };

@@ -4,6 +4,7 @@ import { RootState } from "@/store";
 import { RangeRow } from "./components/RangeRow";
 import { TableForm } from "./components/TableForm";
 import { actions } from "./reducer";
+import { WidgetBase, Button } from "@/components";
 
 const mapStateToProps = ({ game }: RootState) => ({
   speed: game.speed,
@@ -43,11 +44,10 @@ export const GameParams: React.FC<GameParamsProps> = ({
   );
 
   return (
-    <div>
-      <h4>Game settings</h4>
+    <WidgetBase title="Game settings" color="red">
       <TableForm>
         <RangeRow
-          label="Init percent"
+          label="Init %"
           name="initialPercent"
           value={initialPercent}
           valueEnding="%"
@@ -67,33 +67,33 @@ export const GameParams: React.FC<GameParamsProps> = ({
           onChange={onChange}
         />
         <tr>
-          <td colSpan={3}>
-            <button
+          <td colSpan={2}>
+            <Button
               name="regenerate"
               color="blue"
               disabled={
                 isRunning || initialPercent === 0 || initialPercent === 100
               }
+              fullWidth
               onClick={generate}
             >
               Regenerate
-            </button>
+            </Button>
           </td>
-        </tr>
-        <tr>
-          <td colSpan={3}>
-            <button
+          <td colSpan={1}>
+            <Button
               name="reset"
               color="red"
+              fullWidth
               disabled={isRunning}
               onClick={reset}
             >
               Reset
-            </button>
+            </Button>
           </td>
         </tr>
       </TableForm>
-    </div>
+    </WidgetBase>
   );
 };
 

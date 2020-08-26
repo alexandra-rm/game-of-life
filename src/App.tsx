@@ -5,7 +5,7 @@ import { GamePage, HomePage, NotFoundPage } from "@/pages";
 import { store } from "./store";
 import { PageContent, PageWrapper, SideColumn } from "./AppComponents";
 import { Widgets } from "./modules";
-import { Statistics, FilledPercentStatistics } from "./modules/Statistics";
+import { Statistics } from "./modules/Statistics";
 
 const App: FC = () => {
   return (
@@ -21,9 +21,8 @@ const App: FC = () => {
           </BrowserRouter>
         </PageContent>
         <SideColumn>
-          <FilledPercentStatistics />
-          <Statistics />
           <Widgets />
+          <Statistics />
         </SideColumn>
       </PageWrapper>
     </Provider>

@@ -32,7 +32,7 @@ interface BadgeWrapperProps {
 }
 
 interface BadgeProps {
-  text: string;
+  text: string | React.ReactElement;
 }
 
 const BadgeWrapper = styled("span")<BadgeWrapperProps>`

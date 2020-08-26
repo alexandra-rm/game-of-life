@@ -7,18 +7,18 @@ export const cardColors = [
   "violet",
   "black",
 ] as const;
-type Color = typeof cardColors[number];
+export type Color = typeof cardColors[number];
 
 type ColorsMap = {
-  [key in Color]: string;
+  [key in Color]: { bg: string; font: string };
 };
 
 const colorsMap: ColorsMap = {
-  red: "#FF4C60",
-  white: "#FFF",
-  yellow: "#FAAA1E",
-  violet: "#6C6CE5",
-  black: "#292B31",
+  red: { bg: "#FF4C60", font: "white" },
+  white: { bg: "#FFF", font: "black" },
+  yellow: { bg: "#FAAA1E", font: "white" },
+  violet: { bg: "#6C6CE5", font: "white" },
+  black: { bg: "#292B31", font: "white" },
 };
 
 export interface CardProps {
@@ -30,8 +30,10 @@ export const Card = styled("div")<CardProps>`
   border-radius: 10px;
   padding: ${({ thin }) => (thin ? "10px" : "15px")} 20px;
   transition: 0.1s;
-  background-color: ${({ bgColor }) => colorsMap[bgColor]};
-
+  ${({ bgColor }) => `
+    background-color: ${colorsMap[bgColor].bg};
+    color: ${colorsMap[bgColor].font};
+  `}
   :hover {
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
   }

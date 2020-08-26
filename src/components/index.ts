@@ -5,3 +5,5 @@ export { GameField } from "./GameField";
 export { Badge } from "./Badge";
 export { HeightMap } from "./HeightMap";
 export { ActionWindow } from "./ActionWindow";
+export { WidgetBase } from "./WidgetBase";
+export { Button } from "./Button";
