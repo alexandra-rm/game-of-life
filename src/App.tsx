@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 import { GamePage, HomePage, NotFoundPage } from "@/pages";
 import { store } from "./store";
 import { PageContent, PageWrapper, SideColumn } from "./AppComponents";
@@ -11,6 +13,7 @@ import { BalanceWidget } from "./modules/Money";
 const App: FC = () => {
   return (
     <Provider store={store}>
+      <ReactNotification />
       <PageWrapper>
         <PageContent>
           <BrowserRouter>

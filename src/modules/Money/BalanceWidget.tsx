@@ -24,7 +24,7 @@ const BalanceWidgetComponent = ({ cash }: Props) => (
   <WidgetBase color="white">
     <Wrapper>
       <Badge text={<FaCoins />} color="green" />
-      {cash}
+      {cash.toFixed(2)}
     </Wrapper>
   </WidgetBase>
 );

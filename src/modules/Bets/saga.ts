@@ -1,4 +1,5 @@
 import { put, takeEvery, select } from "redux-saga/effects";
+import { store as notifications } from "react-notifications-component";
 import { RootState } from "@/store";
 import { actions as gameActions } from "../GameOfLife/reducer";
 import {
@@ -49,8 +50,30 @@ function* checkBet() {
 
     if (delta <= bet.maxError) {
       yield put(moneyActions.addCash(deltaCash));
+      notifications.addNotification({
+        title: "You win!",
+        message: `+${deltaCash.toFixed(2)}`,
+        type: "success",
+        insert: "top",
+        container: "top-center",
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
     } else {
       yield put(moneyActions.minusCash(deltaCash));
+      notifications.addNotification({
+        title: "You lose!",
+        message: `-${deltaCash.toFixed(2)}`,
+        type: "danger",
+        insert: "top",
+        container: "top-center",
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+        },
+      });
     }
 
     yield put(gameActions.switchGameStatus());
