@@ -5,7 +5,8 @@ import { GamePage, HomePage, NotFoundPage } from "@/pages";
 import { store } from "./store";
 import { PageContent, PageWrapper, SideColumn } from "./AppComponents";
 import { Widgets } from "./modules";
-import { Statistics } from "./modules/Statistics";
+import { GenerationWidget } from "./modules/Statistics";
+import { BalanceWidget } from "./modules/Money";
 
 const App: FC = () => {
   return (
@@ -22,7 +23,8 @@ const App: FC = () => {
         </PageContent>
         <SideColumn>
           <Widgets />
-          <Statistics />
+          <BalanceWidget />
+          <GenerationWidget />
         </SideColumn>
       </PageWrapper>
     </Provider>

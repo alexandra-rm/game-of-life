@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { PageHeader, StyledNavLink, H1, Links } from "./styled";
 
 export const HomePage = () => (

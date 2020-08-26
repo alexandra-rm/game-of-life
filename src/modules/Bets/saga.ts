@@ -50,6 +50,8 @@ function* checkBet() {
     } else {
       yield put(moneyActions.minusCash(bet.bet));
     }
+
+    yield put(gameActions.switchGameStatus());
   }
 }
 

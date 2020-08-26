@@ -5,8 +5,6 @@ import { FaDna } from "react-icons/fa";
 import { RootState } from "@/store";
 import { WidgetBase, Badge } from "@/components";
 
-// TODO: Rename and make widget
-
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -22,8 +20,8 @@ const mapStateToProps = ({ statistics }: RootState) => ({
 
 export type Props = ReturnType<typeof mapStateToProps>;
 
-const StatisticsComponent = ({ generation }: Props) => (
-  <WidgetBase color="red">
+const GenerationWidgetComponent = ({ generation }: Props) => (
+  <WidgetBase color="white">
     <Wrapper>
       <Badge text={<FaDna />} color="red" />
       {`Поколение №  ${generation}`}
@@ -31,4 +29,6 @@ const StatisticsComponent = ({ generation }: Props) => (
   </WidgetBase>
 );
 
-export const Statistics = connect(mapStateToProps)(StatisticsComponent);
+export const GenerationWidget = connect(mapStateToProps)(
+  GenerationWidgetComponent
+);
