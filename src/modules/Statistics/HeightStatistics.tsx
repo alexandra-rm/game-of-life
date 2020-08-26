@@ -6,6 +6,7 @@ import { actions } from "./reducer";
 
 const mapStateToProps = ({ statistics }: RootState) => ({
   cells: statistics.counters,
+  selectedCell: statistics.seletedCell,
 });
 
 const mapDispatchToProps = {
@@ -15,9 +16,10 @@ const mapDispatchToProps = {
 export type Props = ReturnType<typeof mapStateToProps> &
   typeof mapDispatchToProps;
 
-const HeightStatisticsComponent = ({ cells, onClick }: Props) => (
+const HeightStatisticsComponent = ({ cells, selectedCell, onClick }: Props) => (
   <HeightMap
     cells={cells}
+    selectedCell={selectedCell}
     onClick={(x, y) => {
       onClick({ x, y });
     }}

@@ -20,7 +20,7 @@ function* discardWorker(arg) {
   if (arg.type === gameActions.setInitialPercent.type) {
     const percent = yield select(getInitialPercent);
     yield put(statisticsActions.setFilledPercent(percent / 100));
-  } else {
+  } else if (arg.type !== gameActions.generate.type) {
     yield put(statisticsActions.discardFilledPercent());
   }
 }
