@@ -25,6 +25,16 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
+const H1 = styled.h1`
+  margin-top: 0;
+`;
+
+const Links = styled.div`
+  ${StyledNavLink} {
+    margin-right: 20px;
+  }
+`;
+
 export const GamePage = ({ match }) => {
   const dispatch = useDispatch();
 
@@ -53,13 +63,18 @@ export const GamePage = ({ match }) => {
 
   return (
     <div>
-      <div>
-        <Link to="/">На главную</Link>
+      <H1>
+        Game
+        <StyledNavLink exact to="/">
+          На главную
+        </StyledNavLink>
+      </H1>
+      <Links>
         <StyledNavLink exact to={`${match.url}`}>
           Игра
         </StyledNavLink>
         <StyledNavLink to={`${match.url}/statistics`}>Статистика</StyledNavLink>
-      </div>
+      </Links>
       <GameWrapper>
         <Switch>
           <Route exact path={`${match.url}`} component={GameOfLife} />
