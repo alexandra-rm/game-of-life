@@ -2,12 +2,15 @@ import React from "react";
 import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
-import { GameOfLife } from "@/modules";
 import { actions } from "@/modules/Widgets/reducer";
-import { HeightStatistics } from "@/modules/Statistics";
-import { BetWindow } from "@/modules/Bets/BetWindow";
+import {
+  GameOfLife,
+  BetWindow,
+  HeightStatistics,
+  AccessChecker,
+} from "@/modules";
+
 import { PageHeader, StyledNavLink, H1, Links } from "./styled";
-import { AccessChecker } from "@/modules/Account/AccessChecker";
 
 const GameWrapper = styled.div`
   max-width: 55%;

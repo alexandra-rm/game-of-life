@@ -1,5 +1,6 @@
 import React from "react";
 import { FaPlayCircle } from "react-icons/fa";
+import { AccessChecker } from "@/modules";
 import {
   PageHeader,
   StyledNavLink,
@@ -7,7 +8,6 @@ import {
   AbsoluteCenter,
   RelativeWrapper,
 } from "./styled";
-import { AccessChecker } from "@/modules/Account";
 
 export const HomePage = () => (
   <AccessChecker>
