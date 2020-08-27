@@ -4,28 +4,28 @@ import { actions as accountActions } from "../Account/reducer";
 import { actions } from "./reducer";
 import { getUserCash, saveCash } from "./helpers";
 
-const getActiveUser = (state: RootState) => state.account.username;
-const getCash = (state: RootState) => state.money.cash;
+export const getActiveUser = (state: RootState) => state.account.username;
+export const getCash = (state: RootState) => state.money.cash;
 
-function* updateCashWorker() {
+export function* updateCashWorker() {
   const username = yield select(getActiveUser);
   const cash = yield select(getCash);
 
   yield call(saveCash, username, cash);
 }
 
-function* getUserCashWorker() {
+export function* getUserCashWorker() {
   const username = yield select(getActiveUser);
   const userCash = yield call(getUserCash, username);
 
   yield put(actions.setCash(userCash));
 }
 
-function* discardUserCashWorker() {
+export function* discardUserCashWorker() {
   yield put(actions.setCash(0));
 }
 
-function* moneySaga() {
+export function* moneySaga() {
   yield takeEvery(
     [actions.addCash.type, actions.minusCash.type],
     updateCashWorker
@@ -34,5 +34,3 @@ function* moneySaga() {
   yield takeEvery(accountActions.login, getUserCashWorker);
   yield takeEvery(accountActions.logout, discardUserCashWorker);
 }
-
-export { moneySaga };
