@@ -7,7 +7,7 @@ import { statisticsSaga, statisticsSlice } from "./modules/Statistics";
 import { betsSlice, betsSaga } from "./modules/Bets";
 import { accountSlice, accountSaga } from "./modules/Account";
 import { widgetsSlice } from "./modules/Widgets";
-import { moneySlice } from "./modules/Money";
+import { moneySlice, moneySaga } from "./modules/Money";
 
 const reducer = combineReducers({
   game: gameSlice.reducer,
@@ -28,3 +28,4 @@ sagaMiddleware.run(statisticsSaga);
 sagaMiddleware.run(gameSaga);
 sagaMiddleware.run(betsSaga);
 sagaMiddleware.run(accountSaga);
+sagaMiddleware.run(moneySaga);
