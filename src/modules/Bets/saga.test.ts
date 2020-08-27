@@ -7,9 +7,7 @@ import {
   disableBet,
   discardWorker,
   getBetData,
-  getCounters,
   getGeneration,
-  getInitialPercent,
 } from "./saga";
 import { actions } from "./reducer";
 import { actions as gameActions } from "../GameOfLife/reducer";
