@@ -17,6 +17,7 @@ export const heightMap = (): JSX.Element => (
       [7, 8, 9],
     ])}
     showOnlyMax={boolean("showOnlyMax", false)}
+    selectedCell={object("selectedCell", { x: 1, y: 2 })}
     onClick={action("onClick")}
   />
 );

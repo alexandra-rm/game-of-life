@@ -1,7 +1,7 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 import { GameField } from "./GameField";
-import { Cell } from "@/components";
+import { Cell } from "../Cell";
 
 describe("GameField", () => {
   it("render needed count cells", () => {

@@ -37,7 +37,7 @@ class PercentChart extends React.Component<
     color: "black",
     bgColor: "white",
     chartBgColor: "black",
-    chartColors: ["#3aeb34", "#eb4334"],
+    chartColors: ["#FAAA1E", "#FF4C60"],
   };
 
   componentDidMount() {
