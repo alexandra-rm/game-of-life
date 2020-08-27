@@ -1,30 +1,39 @@
 import { take, put, fork, cancel, delay, select } from "redux-saga/effects";
+import { RootState } from "@/store";
 import { actions } from "./reducer";
 
-const getGameProcessState = (state) => ({
+export const getGameProcessState = (state: RootState) => ({
   isRunning: state.game.isRunning,
   speed: state.game.speed,
 });
 
 let game = undefined;
 
-function* backgroundGame() {
+export function* backgroundGame() {
   const { speed } = yield select(getGameProcessState);
-  let seconds = speed <= 0 ? 0 : 1000 / speed;
+  const seconds = speed <= 0 ? 0 : 1000 / speed;
   while (seconds > 0) {
     yield put(actions.update());
-    const gameProcessState = yield select(getGameProcessState);
-    seconds = gameProcessState.speed <= 0 ? 0 : 1000 / gameProcessState.speed;
     yield delay(seconds);
   }
 }
 
-function* gameSaga() {
+export function* gameSaga() {
   while (yield take(actions.switchGameStatus.type)) {
     game = yield fork(backgroundGame);
-    yield take(actions.switchGameStatus.type);
-    yield cancel(game);
+    let action;
+    while (
+      (action = yield take([
+        actions.switchGameStatus.type,
+        actions.setSpeed.type,
+      ]))
+    ) {
+      yield cancel(game);
+      if (action.type === actions.setSpeed.type) {
+        game = yield fork(backgroundGame);
+      } else {
+        break;
+      }
+    }
   }
 }
-
-export { gameSaga };
