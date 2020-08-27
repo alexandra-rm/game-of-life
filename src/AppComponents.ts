@@ -8,7 +8,7 @@ export const PageContent = styled.main`
   flex: 3;
   background-color: #f1f1f1;
   background-color: #fff;
-  padding: 10px;
+  padding: 40px;
 `;
 
 export const SideColumn = styled.aside`
@@ -17,6 +17,6 @@ export const SideColumn = styled.aside`
   max-width: 400px;
   flex: 1;
   background: #f6f7ff;
-  padding: 20px;
+  padding: 40px;
   box-sizing: border-box;
 `;

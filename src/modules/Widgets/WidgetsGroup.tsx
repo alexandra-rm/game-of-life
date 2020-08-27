@@ -10,11 +10,11 @@ export const WidgetsGroup: FC<WidgetsGroupProps> = ({ widgets }) => {
   return (
     <div>
       {widgets.map((widget) => {
-        const { widget: widgetName, id, props } = widget;
+        const { widget: widgetName, id } = widget;
         const Component = config[widgetName];
         return (
           <div key={id}>
-            <Component {...props} id={id} />
+            <Component id={id} />
           </div>
         );
       })}

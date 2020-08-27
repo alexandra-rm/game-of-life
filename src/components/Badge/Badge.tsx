@@ -32,7 +32,7 @@ interface BadgeWrapperProps {
 }
 
 interface BadgeProps {
-  text: string;
+  text?: string | React.ReactElement;
 }
 
 const BadgeWrapper = styled("span")<BadgeWrapperProps>`
@@ -60,5 +60,6 @@ BadgeWrapper.defaultProps = {
 
 export const Badge: FC<BadgeProps & BadgeWrapperProps> = ({
   text,
+  children,
   ...rest
-}) => <BadgeWrapper {...rest}>{text}</BadgeWrapper>;
+}) => <BadgeWrapper {...rest}>{text ? text : children}</BadgeWrapper>;
