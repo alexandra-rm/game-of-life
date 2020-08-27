@@ -20,6 +20,10 @@ export const moneySlice = createSlice({
       ...state,
       cash: state.cash - payload,
     }),
+    setCash: (state, { payload }: PayloadAction<number>) => ({
+      ...state,
+      cash: payload,
+    }),
   },
 });
 

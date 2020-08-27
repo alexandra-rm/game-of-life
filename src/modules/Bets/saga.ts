@@ -10,12 +10,13 @@ import { actions as moneyActions } from "../Money/reducer";
 import { actions, BetsState } from "./reducer";
 import { getMaxValue, computeGain } from "./helpers";
 
-const getInitialPercent = (state: RootState) => state.game.initialPercent;
-const getGeneration = (state: RootState) => state.statistics.generation;
-const getCounters = (state: RootState) => state.statistics.counters;
-const getBetData = (state: RootState) => state.bets;
+export const getInitialPercent = (state: RootState) =>
+  state.game.initialPercent;
+export const getGeneration = (state: RootState) => state.statistics.generation;
+export const getCounters = (state: RootState) => state.statistics.counters;
+export const getBetData = (state: RootState) => state.bets;
 
-function* discardWorker() {
+export function* discardWorker() {
   const percent = yield select(getInitialPercent);
 
   if (percent > 0) {
@@ -25,11 +26,11 @@ function* discardWorker() {
   }
 }
 
-function* disableBet() {
+export function* disableBet() {
   yield put(actions.setAllowBet(false));
 }
 
-function* banBet() {
+export function* banBet() {
   const bet: BetsState = yield select(getBetData);
   if (bet && bet.bet) {
     yield put(actions.setAllowBet(false));
@@ -50,7 +51,7 @@ function* banBet() {
   }
 }
 
-function* checkBet() {
+export function* checkBet() {
   const generation = yield select(getGeneration);
   const bet: BetsState = yield select(getBetData);
   if (bet && bet.bet && bet.betGeneration == generation) {
@@ -94,7 +95,7 @@ function* checkBet() {
   }
 }
 
-function* clickListener(action: StatisticsOnClickActionType) {
+export function* clickListener(action: StatisticsOnClickActionType) {
   const bet: BetsState = yield select(getBetData);
   if (bet.allowBet) {
     yield put(actions.setBetCell(action.payload));
@@ -102,7 +103,7 @@ function* clickListener(action: StatisticsOnClickActionType) {
   }
 }
 
-function* betsSaga() {
+export function* betsSaga() {
   yield takeEvery(
     [
       gameActions.reset.type,
@@ -117,5 +118,3 @@ function* betsSaga() {
   yield takeEvery(statisticsActions.incrementGen, checkBet);
   yield takeEvery(statisticsActions.onClick, clickListener);
 }
-
-export { betsSaga };
