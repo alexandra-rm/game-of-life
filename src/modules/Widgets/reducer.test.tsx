@@ -70,6 +70,21 @@ describe("Widgets reducer", () => {
     });
   });
 
+  it("removeCommonWidget remove non-existent widget", () => {
+    expect(
+      reducer(
+        {
+          ...initialState,
+          commonWidgets: [widgetConfig, widgetConfig2],
+        },
+        actions.removeCommonWidget("some random widget's id")
+      )
+    ).toEqual({
+      ...initialState,
+      commonWidgets: [widgetConfig, widgetConfig2],
+    });
+  });
+
   it("clearPageWidgets remove required widget if exists", () => {
     expect(
       reducer(

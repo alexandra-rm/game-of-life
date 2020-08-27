@@ -4,7 +4,6 @@ import styled from "@emotion/styled";
 const Table = styled.table`
   width: 100%;
   text-align: left;
-  padding: 10px 0;
 
   th {
     color: #595a8a;

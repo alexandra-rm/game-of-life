@@ -5,12 +5,14 @@ export type StatisticsState = {
   generation: number;
   filledPercent: number;
   counters: number[][];
+  seletedCell?: { x: number; y: number };
 };
 
 export const initialState: StatisticsState = {
   generation: 0,
   filledPercent: 0,
   counters: [[]],
+  seletedCell: undefined,
 };
 
 export type CountersActionType = PayloadAction<boolean[][]>;
@@ -72,7 +74,10 @@ export const statisticsSlice = createSlice({
       ...state,
       filledPercent: payload,
     }),
-    onClick: (state, { payload }: StatisticsOnClickActionType) => state,
+    onClick: (state, { payload }: StatisticsOnClickActionType) => ({
+      ...state,
+      seletedCell: payload,
+    }),
   },
 });
 

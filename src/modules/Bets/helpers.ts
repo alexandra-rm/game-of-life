@@ -18,3 +18,9 @@ export const getMaxValue = (arr: number[][]) => {
   const { x, y } = getMaxCell(arr);
   return arr[y][x];
 };
+
+export const computeGain = (
+  bet: number,
+  betGeneration: number,
+  maxError: number
+) => (bet * betGeneration) / (maxError + 1) / 50;

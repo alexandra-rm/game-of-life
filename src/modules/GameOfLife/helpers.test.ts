@@ -1,4 +1,10 @@
-import { initFields, toggleCellState, resize, calcInterval } from "./helpers";
+import {
+  initFields,
+  toggleCellState,
+  resize,
+  calcInterval,
+  generateField,
+} from "./helpers";
 
 describe("GameOfLife helpers functions", () => {
   it("'initFields' generate array with needed sizes", () => {
@@ -97,5 +103,20 @@ describe("GameOfLife helpers functions", () => {
     expect(calcInterval(2)).toEqual(500);
     expect(calcInterval(0.5)).toEqual(2000);
     expect(calcInterval(0)).toEqual(0);
+  });
+
+  it("'generateField' check", () => {
+    const width = 1000;
+    const height = 1000;
+    const filledPercent = 30;
+
+    const field = generateField(height, width, filledPercent);
+    const filledCount = field.reduce(
+      (sum, row) => sum + row.reduce((acc, cell) => acc + (cell ? 1 : 0), 0),
+      0
+    );
+    const percent = filledCount / (height * width);
+
+    expect(Math.abs(percent - filledPercent / 100)).toBeLessThanOrEqual(0.05);
   });
 });

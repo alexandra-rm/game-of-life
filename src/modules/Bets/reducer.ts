@@ -49,10 +49,14 @@ export const betsSlice = createSlice({
       allowBet: false,
       isOpenBetWindow: false,
     }),
-    setMaxError: (state, { payload }: PayloadAction<number>) => ({
-      ...state,
-      maxError: payload,
-    }),
+    setMaxError: (state, { payload }: PayloadAction<number>) => {
+      const error = Math.min(Math.max(payload / 100, 0), 1);
+
+      return {
+        ...state,
+        maxError: error,
+      };
+    },
   },
 });
 
