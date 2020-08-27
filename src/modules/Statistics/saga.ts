@@ -3,17 +3,18 @@ import { RootState } from "@/store";
 import { actions as gameActions } from "../GameOfLife/reducer";
 import { actions as statisticsActions } from "./reducer";
 
-const getGameField = (state: RootState) => state.game.field;
-const getInitialPercent = (state: RootState) => state.game.initialPercent;
+export const getGameField = (state: RootState) => state.game.field;
+export const getInitialPercent = (state: RootState) =>
+  state.game.initialPercent;
 
-function* incrementWorker() {
+export function* incrementWorker() {
   const field = yield select(getGameField);
   yield put(statisticsActions.addCounters(field));
   yield put(statisticsActions.incrementGen());
   yield put(statisticsActions.updateFilledPercent(field));
 }
 
-function* discardWorker(arg) {
+export function* discardWorker(arg) {
   const field = yield select(getGameField);
   yield put(statisticsActions.initCounters(field));
   yield put(statisticsActions.discardGen());
@@ -25,7 +26,7 @@ function* discardWorker(arg) {
   }
 }
 
-function* statisticsSaga() {
+export function* statisticsSaga() {
   yield takeEvery(gameActions.update.type, incrementWorker);
   yield takeEvery(
     [
@@ -36,5 +37,3 @@ function* statisticsSaga() {
     discardWorker
   );
 }
-
-export { statisticsSaga };
