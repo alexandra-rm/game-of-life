@@ -5,6 +5,7 @@ import createSagaMiddleware from "redux-saga";
 import { gameSlice, gameSaga } from "./modules/GameOfLife";
 import { statisticsSaga, statisticsSlice } from "./modules/Statistics";
 import { betsSlice, betsSaga } from "./modules/Bets";
+import { accountSlice, accountSaga } from "./modules/Account";
 import { widgetsSlice } from "./modules/Widgets";
 import { moneySlice } from "./modules/Money";
 
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   bets: betsSlice.reducer,
   widgets: widgetsSlice.reducer,
   money: moneySlice.reducer,
+  account: accountSlice.reducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
@@ -25,3 +27,4 @@ export const store = configureStore({ reducer, middleware: [sagaMiddleware] });
 sagaMiddleware.run(statisticsSaga);
 sagaMiddleware.run(gameSaga);
 sagaMiddleware.run(betsSaga);
+sagaMiddleware.run(accountSaga);

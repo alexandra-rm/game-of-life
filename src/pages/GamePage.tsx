@@ -7,6 +7,7 @@ import { actions } from "@/modules/Widgets/reducer";
 import { HeightStatistics } from "@/modules/Statistics";
 import { BetWindow } from "@/modules/Bets/BetWindow";
 import { PageHeader, StyledNavLink, H1, Links } from "./styled";
+import { AccessChecker } from "@/modules/Account/AccessChecker";
 
 const GameWrapper = styled.div`
   max-width: 55%;
@@ -46,31 +47,33 @@ export const GamePage = ({ match }) => {
   }, []);
 
   return (
-    <div>
-      <PageHeader>
-        <H1>Game</H1>
-        <Links>
-          <StyledNavLink exact to={`${match.url}`}>
-            Игра
-          </StyledNavLink>
-          <StyledNavLink to={`${match.url}/statistics`}>
-            Статистика
-          </StyledNavLink>
-          <StyledNavLink exact to="/">
-            На главную
-          </StyledNavLink>
-        </Links>
-      </PageHeader>
-      <GameWrapper>
-        <Switch>
-          <Route exact path={`${match.url}`} component={GameOfLife} />
-          <Route
-            path={`${match.url}/statistics`}
-            component={HeightStatistics}
-          />
-        </Switch>
-      </GameWrapper>
-      <BetWindow />
-    </div>
+    <AccessChecker>
+      <div>
+        <PageHeader>
+          <H1>Game</H1>
+          <Links>
+            <StyledNavLink exact to={`${match.url}`}>
+              Игра
+            </StyledNavLink>
+            <StyledNavLink to={`${match.url}/statistics`}>
+              Статистика
+            </StyledNavLink>
+            <StyledNavLink exact to="/">
+              На главную
+            </StyledNavLink>
+          </Links>
+        </PageHeader>
+        <GameWrapper>
+          <Switch>
+            <Route exact path={`${match.url}`} component={GameOfLife} />
+            <Route
+              path={`${match.url}/statistics`}
+              component={HeightStatistics}
+            />
+          </Switch>
+        </GameWrapper>
+        <BetWindow />
+      </div>
+    </AccessChecker>
   );
 };

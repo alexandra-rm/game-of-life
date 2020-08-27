@@ -35,7 +35,14 @@ describe("Bets's reducer", () => {
   it("setMaxError action", () => {
     expect(reducer({ ...initialState }, actions.setMaxError(32))).toEqual({
       ...initialState,
-      maxError: 32,
+      maxError: 0.32,
+    });
+  });
+
+  it("setMaxError action with arg > 100", () => {
+    expect(reducer({ ...initialState }, actions.setMaxError(132))).toEqual({
+      ...initialState,
+      maxError: 1,
     });
   });
 

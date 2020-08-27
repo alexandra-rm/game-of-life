@@ -7,18 +7,21 @@ import {
   AbsoluteCenter,
   RelativeWrapper,
 } from "./styled";
+import { AccessChecker } from "@/modules/Account";
 
 export const HomePage = () => (
-  <div>
-    <PageHeader>
-      <H1>HomePage</H1>
-      <RelativeWrapper>
-        <AbsoluteCenter>
-          <StyledNavLink exact to="/game">
-            <FaPlayCircle />
-          </StyledNavLink>
-        </AbsoluteCenter>
-      </RelativeWrapper>
-    </PageHeader>
-  </div>
+  <AccessChecker>
+    <div>
+      <PageHeader>
+        <H1>HomePage</H1>
+        <RelativeWrapper>
+          <AbsoluteCenter>
+            <StyledNavLink exact to="/game">
+              <FaPlayCircle />
+            </StyledNavLink>
+          </AbsoluteCenter>
+        </RelativeWrapper>
+      </PageHeader>
+    </div>
+  </AccessChecker>
 );
